@@ -2,9 +2,14 @@ import React from 'react'
 import {Block,Box, Paragraph, Flex, FlexItem, Actions, Button, BlockAccordion} from '@qiwi/pijma-desktop'
 import { testData } from '../test/testData'
 import { ApprovGridComponent } from '../components/approvGridComponent'
+import{fetchReservationsApproved} from '../api/api'
 
 export const ActiveSessions: React.FC<any> = () => {
     const [opened, setOpened] = React.useState([] as any)
+    const [reservations, setReservations] = React.useState<any>(null)
+    React.useEffect(() => {
+        fetchReservationsApproved().then(res => setReservations(res));
+      }, []);
     const filteredItemsbyStatus = testData.reservations.filter(item => item.status === 'подтверждено')
     return (
         <Flex>
@@ -13,14 +18,14 @@ export const ActiveSessions: React.FC<any> = () => {
   <BlockAccordion
   opened={opened}
   onChange={(opened) => setOpened(opened)}
-  items = {filteredItemsbyStatus.map((item) => {
+  items = {reservations? reservations.reservations.map((item: { user: any; begin: string | number | Date; end: string | number | Date }) => {
     return {
       title:  `${item.user} - ${new Date(item.begin).toLocaleDateString()} до ${new Date(item.end).toLocaleDateString()} `,
       content: <Flex>
         <ApprovGridComponent data={item} /> 
         </Flex>,
     }
-  })}
+  }) : []}
   />
   
   <FlexItem width={'20%'} align='center' > 
