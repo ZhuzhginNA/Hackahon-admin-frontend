@@ -1,6 +1,6 @@
 import React from 'react'
 import {Block,Box, Paragraph, Flex} from '@qiwi/pijma-desktop'
-import { testData } from '../test/testData'
+
 
 
 export const ApprovGridComponent: React.FC<any> = ({data}) => {

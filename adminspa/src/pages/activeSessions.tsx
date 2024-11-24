@@ -1,6 +1,5 @@
 import React from 'react'
 import {Block,Box, Paragraph, Flex, FlexItem, Actions, Button, BlockAccordion} from '@qiwi/pijma-desktop'
-import { testData } from '../test/testData'
 import { ApprovGridComponent } from '../components/approvGridComponent'
 import{fetchReservationsApproved} from '../api/api'
 
@@ -9,8 +8,7 @@ export const ActiveSessions: React.FC<any> = () => {
     const [reservations, setReservations] = React.useState<any>(null)
     React.useEffect(() => {
         fetchReservationsApproved().then(res => setReservations(res));
-      }, []);
-    const filteredItemsbyStatus = testData.reservations.filter(item => item.status === 'подтверждено')
+      }, [])
     return (
         <Flex>
             <FlexItem width={'100%'}>

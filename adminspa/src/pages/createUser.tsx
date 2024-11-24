@@ -8,7 +8,7 @@ export const CreateUser: React.FC = () => {
   const [name, setName] = React.useState('');
 
   const handleSave = () => {
-    // Заглушка для сохранения пользователя
+    
    const email = login
 
     postClient(name, password, email).then((res) => {    
